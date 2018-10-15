@@ -1,7 +1,10 @@
 require("dotenv").config();
 //var spotify = new S potify(keys.spotify);
 var request = require('request');
+var moment = require('moment');
+moment().format();
 var a = process.argv[2];
+
 
 if(a === "concert-this")
 {   
