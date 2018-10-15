@@ -4,7 +4,12 @@ var request = require('request');
 var moment = require('moment');
 moment().format();
 var a = process.argv[2];
+var Spotify = require('node-spotify-api');
 
+var spotify = new Spotify({
+  id: "8f2c9113a2b14cecadf984c45db2756c",
+  secret: "0877aee02b9a4ac5a8d81ab6b33a7f1f"
+});
 
 if(a === "concert-this")
 {   
@@ -16,13 +21,19 @@ if(a === "concert-this")
 
     console.log("Name of the venue: " + b.venue.name);
     console.log(`Venue location: \nCountry: ${b.venue.country} \nCity: ${b.venue.city} \nRegion: ${b.venue.region}`);
-    //console.log("Name of the venue " + b.venuen.name);
+    console.log("Date of event: " + moment(b.datetime).format('MM/DD/YYYY'));
     });
 
 }
 else if(a === "spotify-this-song")
 {
-
+    spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+        if (err) {
+          return console.log('Error occurred: ' + err);
+        }
+       
+      console.log(data); 
+      });
 }
 
 else if(a === "movie-this")
