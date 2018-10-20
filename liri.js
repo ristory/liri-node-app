@@ -13,7 +13,7 @@ var spotify = new Spotify({
 
 if(a === "concert-this")
 {   
-    artist = process.argv[3];
+    var artist = process.argv[3];
     var url1 = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
     request(url1, function(error, response, body){
         if(error) console.log(error);
@@ -27,18 +27,31 @@ if(a === "concert-this")
 }
 else if(a === "spotify-this-song")
 {
-    spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+    var c = process.argv[3]
+    if(!c)
+    {
+        c = "The Sign";
+    }
+    else{}
+    spotify.search({ type: 'track', query: c }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
        
-      console.log(data); 
+      console.log("Artist: " + data.tracks.items[0].album.artists[0].name); 
+      console.log("Name: " + c); 
+      console.log("URL Spotify: " + data.tracks.items[0].album.external_urls.spotify); 
+      console.log("Album: " + data.tracks.items[0].album.name); 
       });
 }
 
 else if(a === "movie-this")
 {
-
+    var movie = process.argv[3];
+    if(movie === "")
+    {
+        
+    }
 }
 
 else if( a=== "do-what-it-says")
