@@ -2,6 +2,7 @@ require("dotenv").config();
 //var spotify = new S potify(keys.spotify);
 var request = require('request');
 var moment = require('moment');
+import imdb = require('imdb');
 moment().format();
 var a = process.argv[2];
 var Spotify = require('node-spotify-api');
@@ -48,10 +49,14 @@ else if(a === "spotify-this-song")
 else if(a === "movie-this")
 {
     var movie = process.argv[3];
-    if(movie === "")
+    if(!movie)
     {
-        
+        movie = "Mr. Nobody"
     }
+    else{}
+    imdb.get({name: movie}, {apiKey: 'trilogy', timeout: 30000})
+    .then(console.log)
+    .catch(console.log);
 }
 
 else if( a=== "do-what-it-says")
